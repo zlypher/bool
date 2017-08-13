@@ -1,6 +1,10 @@
 {
   "name": "bool",
   "version": "0.1.0",
+  "description": "Bool Checker is intended as a simple utility to quickly check what your boolean expression results in with all possible inputs.",
+  "author": "Thomas Prochazka <thomas.prochazka@gmail.com>",
+  "repository": "https://github.com/zlypher/bool",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "react": "^15.6.1",

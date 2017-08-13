@@ -1,20 +1,26 @@
 .BoolCheck {
-    border: 1px solid lightgrey;
 }
 
 .BoolCheck-input {
     box-sizing: border-box;
     border: none;
-    border-bottom: 1px solid lightgrey;
+    border: 1px solid #C1B4AE;
     display: block;
     width: 100%;
     padding: 8px;
     outline: none;
     font-size: 16px;
+    margin-bottom: 16px;
+    transition: border 0.25s ease-in-out;
+}
+
+.BoolCheck-input:hover,
+.BoolCheck-input:active {
+    border: 1px solid #283845;
 }
 
 .BoolCheck-result {
-    border-top: 1px solid lightgrey;
+    border-top: 1px solid #283845;
     width: 100%;
 }
 
@@ -23,13 +29,13 @@
 }
 
 .BoolCheck-empty {
-    color: darkgrey;
+    color: #283845;
     padding: 30px 15px;
     line-height: 20px;
 }
 
 .BoolCheck-result th {
-    border-bottom: 1px solid darkgrey;
+    border-bottom: 1px solid #283845;
 }
 
 .BoolCheck-result td,
@@ -39,7 +45,7 @@
 }
 
 .BoolCheck-result tr:nth-child(odd) td {
-    background-color: lightgrey;
+    background-color: #ECE4B7;
 }
 
 .BoolCheck-var {

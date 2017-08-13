@@ -1,7 +1,12 @@
 .Header {
+    margin-bottom: 16px;
+}
+
+.Header-main {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 4px;
+    color: #D36135;
 }
 
 .Header-sub {
@@ -9,4 +14,10 @@
     font-weight: 300;
     margin-top: 0;
     margin-bottom: 20px;
+}
+
+.Header-note {
+    font-size: 14px;
+    line-height: 18px;
+    color: #C1B4AE;
 }
