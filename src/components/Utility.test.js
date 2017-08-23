@@ -1,4 +1,4 @@
-import { generateArguments } from './Utility';
+import { generateArguments, isAlpha, isDigit, isAlphaNumeric } from './Utility';
 
 it("exports a method 'generateArguments'", () => {
     expect(generateArguments).toBeDefined();
@@ -56,3 +56,31 @@ it("can generate arguments for parameter: 3", () => {
         ]
     )
 });
+
+it ("can determine alphas", () => {
+    const tests = [
+        { in: "a", out: true },
+        { in: "X", out: true },
+        { in: 0, out: false },
+        { in: 9, out: false },
+        { in: 5, out: false },
+    ];
+
+    tests.forEach((test) => {
+        expect(isAlpha(test.in)).toEqual(test.out);
+    });
+})
+
+it ("can determine digits", () => {
+    const tests = [
+        { in: "a", out: false },
+        { in: "X", out: false },
+        { in: 0, out: true },
+        { in: 9, out: true },
+        { in: 5, out: true },
+    ];
+
+    tests.forEach((test) => {
+        expect(isDigit(test.in)).toEqual(test.out);
+    });
+})

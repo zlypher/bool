@@ -1,77 +1,88 @@
-/**
- * Tokenizes the given expression.
- * 
- * https://github.com/thejameskyle/the-super-tiny-compiler/blob/master/the-super-tiny-compiler.js
- * 
- * Tokens consist of a type and a value:
- * 
- * {
- *  type: "TYPE",
- *  value: "VAL"
- * }
- * 
- * Possible types are
- *  - var: A variable (a, b, x, y, z)
- *  - op: An operator (&&, ||)
- * 
- * @param {string} expression The expression to tokenize.
- */
-export const tokenize = (expression) => {
-    let current = 0;
-    let tokens = [];
+import tt from "./BoolTokenTypes";
+import { isAlpha, isAlphaNumeric } from "./Utility";
 
-    while (current < expression.length) {
-        let char = expression[current];
+// TODO: RegEx
+const whitespace = [ " ", "\r", "\t", "\n" ];
 
-        // whitespace...
-        if (/\s/.test(char)) {
-            current++;
-            continue;
-        }
-
-        // Variables (only single letter)
-        let LETTERS = /[a-z]/i;
-        if (LETTERS.test(char)) {
-            let value = char;
-
-            // while (LETTERS.test(char)) {
-            //     value += char;
-            //     char = expression[++current];
-            // }
-
-            tokens.push({
-                type: "var",
-                value: value
-            });
-
-            current++;
-            continue;
-        }
-
-        // && OPERATOR
-        if (char === "&" && expression[++current] === "&") {
-            tokens.push({
-                type: "op",
-                value: "&&",
-            });
-
-            current++;
-            continue;
-        }
-
-        // || OPERATOR
-        if (char === "|" && expression[++current] === "|") {
-            tokens.push({
-                type: "op",
-                value: "||",
-            });
-
-            current++;
-            continue;
-        }
-
-        throw new TypeError("I dont know what this character is: " + char);
+export default class Tokenizer {
+    constructor() {
+        this.tokens = [];
+        this.start = 0;
+        this.current = 0;
     }
 
-    return tokens;
-};
+    tokenize(expression) {
+        this.expression = expression;
+
+        while (!this.isAtEnd()) {
+            this.start = this.current;
+            this.scanToken();
+        }
+
+        this.addToken(tt.EOF);
+        return this.tokens;
+    }
+
+    scanToken() {
+        const c = this.advance();
+
+        if (c === '!') {
+            this.addToken(tt.NOT);
+            return;
+        } else if (c === '|' && this.match('|')) {
+            this.addToken(tt.OR);
+            return;
+        } else if (c === '&' && this.match('&')) {
+            this.addToken(tt.AND);
+            return;
+        } else if (whitespace.includes(c)) {
+            return;
+        } else if (isAlpha(c)) {
+            this.identifier();
+        }
+    }
+
+    addToken(type, value = "") {
+        this.tokens.push({ type, value });
+    }
+
+    isAtEnd() {
+        return this.current >= this.expression.length;
+    }
+
+    advance() {
+        this.current++;
+        return this.expression[this.current - 1];
+    }
+
+    match(expected) {
+        if (this.isAtEnd()) {
+            return false;
+        }
+
+        if (this.expression[this.current] !== expected) {
+            return false;
+        }
+
+        this.current++;
+        return true;
+    }
+
+    peek() {
+        if (this.isAtEnd()) {
+            return "\0";
+        }
+
+        return this.expression[this.current];
+    }
+
+    identifier() {
+        while (isAlphaNumeric(this.peek())) {
+            this.advance();
+        }
+
+        const val = this.expression.substring(this.start, this.current);
+
+        this.addToken(tt.IDENTIFIER, val);
+    }
+}

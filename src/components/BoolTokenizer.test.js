@@ -1,21 +1,24 @@
-import { tokenize } from './BoolTokenizer';
+import BoolTokenizer from "./BoolTokenizer";
+import tt from "./BoolTokenTypes";
 
 it("can tokenize a simple expression", () => {
-    let expression = "a";
-    let tokens = tokenize(expression);
+    const tokenizer = new BoolTokenizer();
+    const tokens = tokenizer.tokenize("a");
 
     expect(tokens).toEqual([
-        { type: "var", value: "a" }
+        { type: tt.IDENTIFIER, value: "a" },
+        { type: tt.EOF, value: "" }
     ]);
 });
 
 it("can tokenize a && expression", () => {
-    let expression = "a && b";
-    let tokens = tokenize(expression);
+    const tokenizer = new BoolTokenizer();
+    const tokens = tokenizer.tokenize("a && b");
 
     expect(tokens).toEqual([
-        { type: "var", value: "a" },
-        { type: "op", value: "&&" },
-        { type: "var", value: "b" }
+        { type: tt.IDENTIFIER, value: "a" },
+        { type: tt.AND, value: "" },
+        { type: tt.IDENTIFIER, value: "b" },
+        { type: tt.EOF, value: "" }
     ]);
 });

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { tokenize } from "./BoolTokenizer";
+import tt from "./BoolTokenTypes";
+import BoolTokenizer from "./BoolTokenizer";
+import BoolParser from "./BoolParser";
 import { generateArguments } from "./Utility";
 import './BoolCheck.css';
 
@@ -24,8 +26,19 @@ export default class BoolCheck extends Component {
      */
     recalculateResult = (expression) => {
         try {
-            const tokens = tokenize(expression);
-            const variables = tokens.filter(t => t.type === "var").map(t => t.value);
+            const tokenizer = new BoolTokenizer();
+            const tokens = tokenizer.tokenize(expression);
+            const variables = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
+                    
+            const tokens2 = [
+                { type: tt.IDENTIFIER, value: "a" },
+                { type: tt.OR, value: "||" },
+                { type: tt.IDENTIFIER, value: "b" },
+                { type: tt.EOF, value: null }
+            ];
+
+            const parser = new BoolParser(tokens2);
+            const ast = parser.parse();
 
             this.setState({
                 arguments: generateArguments(variables.length),

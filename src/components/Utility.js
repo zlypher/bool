@@ -37,6 +37,21 @@ export const generateArguments = (variableCount = 0) => {
     return args;
 };
 
+export const isAlpha = (c) => {
+    return /[a-zA-Z_]/.test(c);
+};
+
+export const isDigit = (c) => {
+    return /[0-9]/.test(c);
+}
+
+export const isAlphaNumeric = (c) => {
+    return isAlpha(c) || isDigit(c);
+}
+
 export default {
-    generateArguments
+    generateArguments,
+    isAlpha,
+    isDigit,
+    isAlphaNumeric
 };
