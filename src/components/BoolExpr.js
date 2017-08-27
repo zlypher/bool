@@ -7,6 +7,10 @@ export class Binary {
         this.op = op;
         this.right = right;
     }
+
+    visit(interpreter) {
+        return interpreter.visitBinaryExpr(this);
+    }
 }
 
 /**
@@ -15,6 +19,10 @@ export class Binary {
 export class Literal {
     constructor(value) {
         this.value = value;
+    }
+    
+    visit(interpreter) {
+        return interpreter.visitLiteralExpr(this);
     }
 }
 
@@ -25,6 +33,10 @@ export class Unary {
     constructor(op, right) {
         this.op = op;
         this.right = right;
+    }
+    
+    visit(interpreter) {
+        return interpreter.visitUnaryExpr(this);
     }
 }
 

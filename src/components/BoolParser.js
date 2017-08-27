@@ -2,29 +2,14 @@ import tt from "./BoolTokenTypes";
 import { Binary, Unary, Literal } from "./BoolExpr";
 
 /**
- * 
  * ----------------------------------------------------------------------------
- * "a"
- * "(a)"
- * "!a"
- * "(!a)"
- * "a && b"
- * "!a && b"
- * "a && (b || !c)"
- * ----------------------------------------------------------------------------
- * 
- * 
- * ----------------------------------------------------------------------------
- * // expression   >   logic ;
- * // logic        >   ...
- * // and          >   or ( "&&" or )* ;
- * expression   >   or ;
+ * expression   >   and ;
+ * and          >   or ( "&&" or )* ;
  * or           >   unary ( "||" unary )* ;
  * unary        >   "!" unary ;
  *              |   primary ;
  * primary      >   STRING | "(" + expression + ")" ;
  * ----------------------------------------------------------------------------
- * 
  * 
  * http://www.craftinginterpreters.com/parsing-expressions.html
  * 
@@ -51,11 +36,29 @@ export default class BoolParser {
     debug(fn) {
         // console.dir(`Call ${fn}`);
     }
+    
+    /**
+     * Grammar functions
+     * ------------------------------------------------------------------------
+     */
 
     // --
     expression() {
         this.debug("expression");
-        return this.or();
+        return this.and();
+    }
+
+    and() {
+        this.debug("and");
+        let expr = this.or();
+
+        while (this.match([ tt.AND ])) {
+            let op = this.previous();
+            let right = this.or();
+            return new Binary(expr, op, right);
+        }
+
+        return expr;
     }
 
     or() {
@@ -92,6 +95,11 @@ export default class BoolParser {
 
     /**
      * Helper functions
+     * ------------------------------------------------------------------------
+     */
+
+    /**
+     * ...
      */
     match(tokenTypes) {
         this.debug("match");
@@ -105,6 +113,9 @@ export default class BoolParser {
         return false;
     }
 
+    /**
+     * Returns the previous element.
+     */
     previous() {
         this.debug("previous");
         return this.tokens[this.current - 1];
@@ -128,12 +139,17 @@ export default class BoolParser {
         return this.previous();
     }
 
+    /**
+     * Checks if we are already at the end of the tokens.
+     */
     isAtEnd() {
         this.debug("isAtEnd");
-        // return this.current >= this.tokens.length;
         return this.peek().type === tt.EOF;
     }
 
+    /**
+     * Returns the current element.
+     */
     peek() {
         this.debug("peek");
         return this.tokens[this.current];
