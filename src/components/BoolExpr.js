@@ -40,6 +40,19 @@ export class Unary {
     }
 }
 
+/**
+ * Represents a GROUPING expression.
+ */
+export class Grouping {
+    constructor(expr) {
+        this.expr = expr;
+    }
+
+    visit(interpreter) {
+        return interpreter.visitGroupingExpr(this);
+    }
+}
+
 export default {
     Binary,
     Literal,

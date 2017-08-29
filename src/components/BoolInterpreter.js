@@ -36,4 +36,9 @@ export default class BoolInterpreter {
         // TODO
         return false;
     }
+
+    visitGroupingExpr(expr) {
+        // TODO
+        return false;
+    }
 }

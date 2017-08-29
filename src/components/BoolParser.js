@@ -1,5 +1,5 @@
 import tt from "./BoolTokenTypes";
-import { Binary, Unary, Literal } from "./BoolExpr";
+import { Binary, Unary, Literal, Grouping } from "./BoolExpr";
 
 /**
  * ----------------------------------------------------------------------------
@@ -91,6 +91,12 @@ export default class BoolParser {
         if (this.match([ tt.IDENTIFIER ])) {
             return new Literal(this.previous().value);
         }
+
+        if (this.match([ tt.LEFT_PAREN ])) {
+            let expr = this.expression();
+            this.consume(tt.RIGHT_PAREN, "Expect ')' after expression.");
+            return new Grouping(expr);
+        }
     }
 
     /**
@@ -153,5 +159,13 @@ export default class BoolParser {
     peek() {
         this.debug("peek");
         return this.tokens[this.current];
+    }
+
+    consume(tokenType, errorMessage) {
+        if (this.check(tokenType)) {
+            return this.advance();
+        }
+
+        throw errorMessage;
     }
 }

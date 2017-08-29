@@ -1,6 +1,6 @@
 import BoolParser from './BoolParser';
 import tt from "./BoolTokenTypes";
-import { Binary, Unary, Literal } from "./BoolExpr";
+import { Binary, Unary, Literal, Grouping } from "./BoolExpr";
 
 it("can parse empty tokens", () => {
     const parser = new BoolParser([{ type: tt.EOF, value: null }]);
@@ -87,8 +87,7 @@ it("can parse a || and && expression", () => {
     );
 });
 
-// TODO: Implement grouping in Boolparser
-xit("can parse a simple () expression", () => {
+it("can parse a simple () expression", () => {
     const tokens = [
         { type: tt.IDENTIFIER, value: "a" },
         { type: tt.AND, value: "" },
@@ -107,12 +106,13 @@ xit("can parse a simple () expression", () => {
         new Binary(
             new Literal("a"),
             { type: tt.AND, value: "" },
-            // TODO
-            // new Binary(
-            //     new Literal("b"),
-            //     { type: tt.OR, value: "" },
-            //     new Literal("c")
-            // ),
+            new Grouping(
+                new Binary(
+                    new Literal("b"),
+                    { type: tt.OR, value: "" },
+                    new Literal("c")
+                )
+            )
         )
     );
 });
