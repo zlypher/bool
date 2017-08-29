@@ -3,8 +3,8 @@ import tt from "./BoolTokenTypes";
 import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
 
 it("can parse empty tokens", () => {
-    const parser = new BoolParser([{ type: tt.EOF, value: null }]);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse([{ type: tt.EOF, value: null }]);
 
     expect(ast).toEqual(undefined);
 });
@@ -15,8 +15,8 @@ it("can parse tokens with only a variable", () => {
         { type: tt.EOF, value: "" }
     ];
 
-    const parser = new BoolParser(tokens);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
 
     expect(ast).toEqual(new Variable("a"));
 });
@@ -29,8 +29,8 @@ it("can parse a simple || expression", () => {
         { type: tt.EOF, value: null }
     ];
 
-    const parser = new BoolParser(tokens);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
 
     expect(ast).toEqual(
         new Binary(
@@ -49,8 +49,8 @@ it("can parse a simple && expression", () => {
         { type: tt.EOF, value: null }
     ];
 
-    const parser = new BoolParser(tokens);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
 
     expect(ast).toEqual(
         new Binary(
@@ -71,8 +71,8 @@ it("can parse a || and && expression", () => {
         { type: tt.EOF, value: null }
     ];
 
-    const parser = new BoolParser(tokens);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
 
     expect(ast).toEqual(
         new Binary(
@@ -99,8 +99,8 @@ it("can parse a simple () expression", () => {
         { type: tt.EOF, value: "" }
     ];
 
-    const parser = new BoolParser(tokens);
-    const ast = parser.parse();
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
 
     expect(ast).toEqual(
         new Binary(

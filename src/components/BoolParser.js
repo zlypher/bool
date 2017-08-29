@@ -19,12 +19,10 @@ import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
  * BoolParser is able to parse a list of tokens and create an AST.
  */
 export default class BoolParser {
-    constructor(tokens) {
+    parse(tokens) {
         this.tokens = tokens;
         this.current = 0;
-    }
 
-    parse() {
         try {
             return this.expression();
         } catch (e) {

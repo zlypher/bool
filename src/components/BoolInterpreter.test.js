@@ -5,20 +5,35 @@ import { Variable, Binary } from "./BoolExpr";
 it("should be able to interprete something", () => {
     const expr = new Variable("a");
     const interpreter = new BoolInterpreter();
-    const result = interpreter.interpret(expr);
+    const result = interpreter.interpret(expr, { a: true });
 
-    expect(result).toEqual("a");
+    expect(result).toEqual(true);
 });
 
-// it("should be able to interprete something more", () => {
-//     const expr = new Binary(
-//         new Variable("a"),
-//         { type: tt.OR, value: "" },
-//         new Variable("b"),
-//     );
+it("should be able to interprete || expression", () => {
+    const expr = new Binary(
+        new Variable("a"),
+        { type: tt.OR, value: "" },
+        new Variable("b"),
+    );
 
-//     const interpreter = new BoolInterpreter();
-//     const result = interpreter.interpret(expr);
+    const interpreter = new BoolInterpreter();
+    const env = { a: true, b: false }
+    const result = interpreter.interpret(expr, env);
 
-//     expect(result).toEqual("a");
-// });
+    expect(result).toEqual(true);
+});
+
+it("should be able to interprete && expression", () => {
+    const expr = new Binary(
+        new Variable("a"),
+        { type: tt.AND, value: "" },
+        new Variable("b"),
+    );
+
+    const interpreter = new BoolInterpreter();
+    const env = { a: true, b: false }
+    const result = interpreter.interpret(expr, env);
+
+    expect(result).toEqual(false);
+});
