@@ -1,11 +1,10 @@
 import tt from "./BoolTokenTypes";
 
 export default class BoolInterpreter {
-    constructor() {
+    constructor() { }
 
-    }
-
-    interpret(expr) {
+    interpret(expr, environment = {}) {
+        this.environment = environment;
         return this.evaluate(expr);
     }
 
@@ -13,7 +12,7 @@ export default class BoolInterpreter {
         return expr.visit(this);
     }
     
-    visitLiteralExpr(expr) {
+    visitVariableExpr(expr) {
         // TODO
         return expr.value;
     }
@@ -38,7 +37,6 @@ export default class BoolInterpreter {
     }
 
     visitGroupingExpr(expr) {
-        // TODO
-        return false;
+        return this.evaluate(expr.expr);
     }
 }

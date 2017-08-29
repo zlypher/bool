@@ -1,6 +1,6 @@
 import BoolParser from './BoolParser';
 import tt from "./BoolTokenTypes";
-import { Binary, Unary, Literal, Grouping } from "./BoolExpr";
+import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
 
 it("can parse empty tokens", () => {
     const parser = new BoolParser([{ type: tt.EOF, value: null }]);
@@ -18,7 +18,7 @@ it("can parse tokens with only a variable", () => {
     const parser = new BoolParser(tokens);
     const ast = parser.parse();
 
-    expect(ast).toEqual(new Literal("a"));
+    expect(ast).toEqual(new Variable("a"));
 });
 
 it("can parse a simple || expression", () => {
@@ -34,9 +34,9 @@ it("can parse a simple || expression", () => {
 
     expect(ast).toEqual(
         new Binary(
-            new Literal("a"),
+            new Variable("a"),
             { type: tt.OR, value: "" },
-            new Literal("b"),
+            new Variable("b"),
         )
     );
 });
@@ -54,9 +54,9 @@ it("can parse a simple && expression", () => {
 
     expect(ast).toEqual(
         new Binary(
-            new Literal("a"),
+            new Variable("a"),
             { type: tt.AND, value: "" },
-            new Literal("b"),
+            new Variable("b"),
         )
     );
 });
@@ -76,12 +76,12 @@ it("can parse a || and && expression", () => {
 
     expect(ast).toEqual(
         new Binary(
-            new Literal("a"),
+            new Variable("a"),
             { type: tt.AND, value: "" },
             new Binary(
-                new Literal("b"),
+                new Variable("b"),
                 { type: tt.OR, value: "" },
-                new Literal("c")
+                new Variable("c")
             ),
         )
     );
@@ -104,13 +104,13 @@ it("can parse a simple () expression", () => {
 
     expect(ast).toEqual(
         new Binary(
-            new Literal("a"),
+            new Variable("a"),
             { type: tt.AND, value: "" },
             new Grouping(
                 new Binary(
-                    new Literal("b"),
+                    new Variable("b"),
                     { type: tt.OR, value: "" },
-                    new Literal("c")
+                    new Variable("c")
                 )
             )
         )

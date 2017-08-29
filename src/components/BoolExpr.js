@@ -14,15 +14,15 @@ export class Binary {
 }
 
 /**
- * Represents a LITERAL expression.
+ * Represents a VARIABLE expression.
  */
-export class Literal {
+export class Variable {
     constructor(value) {
         this.value = value;
     }
     
     visit(interpreter) {
-        return interpreter.visitLiteralExpr(this);
+        return interpreter.visitVariableExpr(this);
     }
 }
 
@@ -55,6 +55,7 @@ export class Grouping {
 
 export default {
     Binary,
-    Literal,
-    Unary
+    Variable,
+    Unary,
+    Grouping
 };

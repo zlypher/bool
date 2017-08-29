@@ -1,9 +1,9 @@
 import BoolInterpreter from "./BoolInterpreter";
 import tt from "./BoolTokenTypes";
-import { Literal, Binary } from "./BoolExpr";
+import { Variable, Binary } from "./BoolExpr";
 
 it("should be able to interprete something", () => {
-    const expr = new Literal("a");
+    const expr = new Variable("a");
     const interpreter = new BoolInterpreter();
     const result = interpreter.interpret(expr);
 
@@ -12,9 +12,9 @@ it("should be able to interprete something", () => {
 
 // it("should be able to interprete something more", () => {
 //     const expr = new Binary(
-//         new Literal("a"),
+//         new Variable("a"),
 //         { type: tt.OR, value: "" },
-//         new Literal("b"),
+//         new Variable("b"),
 //     );
 
 //     const interpreter = new BoolInterpreter();

@@ -1,5 +1,5 @@
 import tt from "./BoolTokenTypes";
-import { Binary, Unary, Literal, Grouping } from "./BoolExpr";
+import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
 
 /**
  * ----------------------------------------------------------------------------
@@ -89,7 +89,7 @@ export default class BoolParser {
     primary() {
         this.debug("primary");
         if (this.match([ tt.IDENTIFIER ])) {
-            return new Literal(this.previous().value);
+            return new Variable(this.previous().value);
         }
 
         if (this.match([ tt.LEFT_PAREN ])) {
