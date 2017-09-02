@@ -1,4 +1,4 @@
-import { generateArguments, isAlpha, isDigit, isAlphaNumeric } from './Utility';
+import { generateArguments, setupEnvironment, isAlpha, isDigit, isAlphaNumeric } from './Utility';
 
 it("exports a method 'generateArguments'", () => {
     expect(generateArguments).toBeDefined();
@@ -55,6 +55,18 @@ it("can generate arguments for parameter: 3", () => {
             [ 1, 1, 1 ],
         ]
     )
+});
+
+it("can setup an environment", () => {
+    const argNames = [ "a", "b", "c" ];
+    const argValues = [ 0, 1, 1 ];
+    const env = setupEnvironment(argNames, argValues);
+
+    expect(env).toEqual({
+        a: false,
+        b: true,
+        c: true
+    });
 });
 
 it ("can determine alphas", () => {

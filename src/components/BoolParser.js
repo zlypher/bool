@@ -23,12 +23,7 @@ export default class BoolParser {
         this.tokens = tokens;
         this.current = 0;
 
-        try {
-            return this.expression();
-        } catch (e) {
-            console.error(e);
-            return null;
-        }
+        return this.expression();
     }
 
     debug(fn) {
@@ -95,6 +90,8 @@ export default class BoolParser {
             this.consume(tt.RIGHT_PAREN, "Expect ')' after expression.");
             return new Grouping(expr);
         }
+
+        throw "Invalid token";
     }
 
     /**

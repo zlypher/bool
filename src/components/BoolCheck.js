@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import tt from "./BoolTokenTypes";
+import BoolInterpreter from "./BoolInterpreter";
 import BoolTokenizer from "./BoolTokenizer";
 import BoolParser from "./BoolParser";
-import { generateArguments } from "./Utility";
+import { generateArguments, setupEnvironment } from "./Utility";
 import './BoolCheck.css';
 
 export default class BoolCheck extends Component {
@@ -27,24 +28,24 @@ export default class BoolCheck extends Component {
     recalculateResult = (expression) => {
         try {
             const tokenizer = new BoolTokenizer();
-            const tokens = tokenizer.tokenize(expression);
-            const variables = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
-                    
-            const tokens2 = [
-                { type: tt.IDENTIFIER, value: "a" },
-                { type: tt.OR, value: "||" },
-                { type: tt.IDENTIFIER, value: "b" },
-                { type: tt.EOF, value: null }
-            ];
+            const parser = new BoolParser();
+            const interpreter = new BoolInterpreter();
 
-            const parser = new BoolParser(tokens2);
-            const ast = parser.parse();
+            const tokens = tokenizer.tokenize(expression);
+            const expr = parser.parse(tokens);
+
+            const args = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
+            const argValues = generateArguments(args.length);
+
+            const func = (expr) => (env) => {
+                return interpreter.interpret(expr, env);
+            }
 
             this.setState({
-                arguments: generateArguments(variables.length),
+                arguments: generateArguments(args.length),
                 expression: expression,
-                fn: () => { return "?" },
-                variables: variables,
+                fn: func(expr),
+                variables: args,
                 tokens: tokens
             });
         } catch(e) {
@@ -88,7 +89,7 @@ export default class BoolCheck extends Component {
                             {state.arguments.map((args) => 
                                 <tr key={args}>
                                     {args.map((a, i) => <td key={`${i}-${a}`}>{a}</td>)}
-                                    <td>{state.fn(...args)}</td>
+                                    <td>{state.fn(setupEnvironment(state.variables, args)) ? "TRUE" : "FALSE"}</td>
                                 </tr>
                             )}
                         </tbody>

@@ -37,6 +37,23 @@ export const generateArguments = (variableCount = 0) => {
     return args;
 };
 
+export const setupEnvironment = (argNames, argValues) => {
+    const env = {};
+
+    if (argNames.length !== argValues.length) {
+        return env;
+    }
+
+    for (let i = 0; i < argNames.length; ++i) {
+        let name = argNames[i];
+        let val = argValues[i];
+
+        env[name] = !!val;
+    }
+
+    return env;
+};
+
 export const isAlpha = (c) => {
     return /[a-zA-Z_]/.test(c);
 };

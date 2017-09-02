@@ -53,6 +53,8 @@ export default class BoolTokenizer {
             return;
         } else if (isAlpha(c)) {
             this.identifier();
+        } else {
+            throw "Invalid character sequence";
         }
     }
 
