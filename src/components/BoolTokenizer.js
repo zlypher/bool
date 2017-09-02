@@ -54,7 +54,7 @@ export default class BoolTokenizer {
         } else if (isAlpha(c)) {
             this.identifier();
         } else {
-            throw "Invalid character sequence";
+            throw new Error("Invalid character sequence");
         }
     }
 

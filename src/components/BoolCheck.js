@@ -35,8 +35,6 @@ export default class BoolCheck extends Component {
             const expr = parser.parse(tokens);
 
             const args = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
-            const argValues = generateArguments(args.length);
-
             const func = (expr) => (env) => {
                 return interpreter.interpret(expr, env);
             }

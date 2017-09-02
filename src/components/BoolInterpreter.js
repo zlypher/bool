@@ -32,9 +32,9 @@ export default class BoolInterpreter {
                 return left || right;
             case tt.AND:
                 return left && right;
+            default:
+                return false;
         }
-
-        return null;
     }
 
     visitUnaryExpr(expr) {

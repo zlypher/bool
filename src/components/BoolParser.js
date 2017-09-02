@@ -91,7 +91,7 @@ export default class BoolParser {
             return new Grouping(expr);
         }
 
-        throw "Invalid token";
+        throw new Error("Invalid token");
     }
 
     /**
