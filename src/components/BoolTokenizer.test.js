@@ -26,7 +26,7 @@ it("can tokenize a && expression", () => {
 
     expect(tokens).toEqual([
         { type: tt.IDENTIFIER, value: "a" },
-        { type: tt.AND, value: "" },
+        { type: tt.AND, value: "&&" },
         { type: tt.IDENTIFIER, value: "b" },
         { type: tt.EOF, value: "" }
     ]);
@@ -38,7 +38,7 @@ it("can tokenize a || expression", () => {
 
     expect(tokens).toEqual([
         { type: tt.IDENTIFIER, value: "a" },
-        { type: tt.OR, value: "" },
+        { type: tt.OR, value: "||" },
         { type: tt.IDENTIFIER, value: "b" },
         { type: tt.EOF, value: "" }
     ]);
@@ -49,7 +49,7 @@ it("can tokenize a ! expression", () => {
     const tokens = tokenizer.tokenize("!a");
 
     expect(tokens).toEqual([
-        { type: tt.NOT, value: "" },
+        { type: tt.NOT, value: "!" },
         { type: tt.IDENTIFIER, value: "a" },
         { type: tt.EOF, value: "" }
     ]);
@@ -61,12 +61,12 @@ it("can tokenize a () expression", () => {
 
     expect(tokens).toEqual([
         { type: tt.IDENTIFIER, value: "a" },
-        { type: tt.AND, value: "" },
-        { type: tt.LEFT_PAREN, value: "" },
+        { type: tt.AND, value: "&&" },
+        { type: tt.LEFT_PAREN, value: "(" },
         { type: tt.IDENTIFIER, value: "b" },
-        { type: tt.OR, value: "" },
+        { type: tt.OR, value: "||" },
         { type: tt.IDENTIFIER, value: "c" },
-        { type: tt.RIGHT_PAREN, value: "" },
+        { type: tt.RIGHT_PAREN, value: ")" },
         { type: tt.EOF, value: "" }
     ]);
 });

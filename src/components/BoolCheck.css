@@ -48,12 +48,32 @@
     background-color: #ECE4B7;
 }
 
-.BoolCheck-var {
+.BoolCheck-IDENTIFIER {
     color: purple;
     padding: 0 1px;
 }
 
-.BoolCheck-op {
+.BoolCheck-AND {
+    color: burlywood;
+    padding: 0 1px;
+}
+
+.BoolCheck-OR {
+    color: burlywood;
+    padding: 0 1px;
+}
+
+.BoolCheck-NOT {
+    color: burlywood;
+    padding: 0 1px;
+}
+
+.BoolCheck-LEFT_PAREN {
+    color: burlywood;
+    padding: 0 1px;
+}
+
+.BoolCheck-RIGHT_PAREN {
     color: burlywood;
     padding: 0 1px;
 }

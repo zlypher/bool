@@ -35,19 +35,19 @@ export default class BoolTokenizer {
         const c = this.advance();
 
         if (c === '(') {
-            this.addToken(tt.LEFT_PAREN);
+            this.addToken(tt.LEFT_PAREN, "(");
             return;
         } else if (c === ')') {
-            this.addToken(tt.RIGHT_PAREN);
+            this.addToken(tt.RIGHT_PAREN, ")");
             return;
         } else if (c === '!') {
-            this.addToken(tt.NOT);
+            this.addToken(tt.NOT, "!");
             return;
         } else if (c === '|' && this.match('|')) {
-            this.addToken(tt.OR);
+            this.addToken(tt.OR, "||");
             return;
         } else if (c === '&' && this.match('&')) {
-            this.addToken(tt.AND);
+            this.addToken(tt.AND, "&&");
             return;
         } else if (whitespace.includes(c)) {
             return;
