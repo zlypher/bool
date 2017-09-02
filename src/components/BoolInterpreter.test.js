@@ -1,6 +1,6 @@
 import BoolInterpreter from "./BoolInterpreter";
 import tt from "./BoolTokenTypes";
-import { Variable, Binary } from "./BoolExpr";
+import { Variable, Binary, Unary, Grouping } from "./BoolExpr";
 
 it("should be able to interprete something", () => {
     const expr = new Variable("a");
@@ -33,6 +33,19 @@ it("should be able to interprete && expression", () => {
 
     const interpreter = new BoolInterpreter();
     const env = { a: true, b: false }
+    const result = interpreter.interpret(expr, env);
+
+    expect(result).toEqual(false);
+});
+
+it("should be able to interprete ! expression", () => {
+    const expr = new Unary(
+        { type: tt.NOT, value: "" },
+        new Variable("a"),
+    );
+
+    const interpreter = new BoolInterpreter();
+    const env = { a: true }
     const result = interpreter.interpret(expr, env);
 
     expect(result).toEqual(false);

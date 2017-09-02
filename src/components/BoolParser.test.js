@@ -61,6 +61,24 @@ it("can parse a simple && expression", () => {
     );
 });
 
+it("can parse a ! expression", () => {
+    const tokens = [
+        { type: tt.NOT, value: "" },
+        { type: tt.IDENTIFIER, value: "a" },
+        { type: tt.EOF, value: "" }
+    ];
+    
+    const parser = new BoolParser();
+    const ast = parser.parse(tokens);
+
+    expect(ast).toEqual(
+        new Unary(
+            { type: tt.NOT, value: "" },
+            new Variable("a"),
+        )
+    );
+});
+
 it("can parse a || and && expression", () => {
     const tokens = [
         { type: tt.IDENTIFIER, value: "a" },

@@ -38,11 +38,13 @@ export default class BoolInterpreter {
     }
 
     visitUnaryExpr(expr) {
-        switch (expr.op) {
+        const right = this.evaluate(expr.right);
+
+        switch (expr.op.type) {
             case tt.NOT:
-                return !expr.value;
+                return !right;
             default:
-                return expr.value;
+                return right;
         }
     }
 
