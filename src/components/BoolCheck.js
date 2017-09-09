@@ -10,6 +10,10 @@ export default class BoolCheck extends Component {
     constructor() {
         super();
 
+        this.tokenizer = new BoolTokenizer();
+        this.parser = new BoolParser();
+        this.interpreter = new BoolInterpreter();
+
         this.state = {
             arguments: [],
             expression: "",
@@ -27,22 +31,16 @@ export default class BoolCheck extends Component {
      */
     recalculateResult = (expression) => {
         try {
-            const tokenizer = new BoolTokenizer();
-            const parser = new BoolParser();
-            const interpreter = new BoolInterpreter();
-
-            const tokens = tokenizer.tokenize(expression);
-            const expr = parser.parse(tokens);
+            const tokens = this.tokenizer.tokenize(expression);
+            const expr = this.parser.parse(tokens);
 
             const args = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
-            const func = (expr) => (env) => {
-                return interpreter.interpret(expr, env);
-            }
+            const interpretFunc = (expr) => (env) => this.interpreter.interpret(expr, env);
 
             this.setState({
                 arguments: generateArguments(args.length),
                 expression: expression,
-                fn: func(expr),
+                fn: interpretFunc(expr),
                 variables: args,
                 tokens: tokens
             });

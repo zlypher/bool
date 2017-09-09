@@ -54,14 +54,26 @@ export const setupEnvironment = (argNames, argValues) => {
     return env;
 };
 
+/**
+ * Checks if the given character is a letter.
+ * @param {char} c The character to test
+ */
 export const isAlpha = (c) => {
     return /[a-zA-Z_]/.test(c);
 };
 
+/**
+ * Checks if the given character is a number.
+ * @param {char} c The character to test
+ */
 export const isDigit = (c) => {
     return /[0-9]/.test(c);
 }
 
+/**
+ * Checks if the given character is either a letter or a number.
+ * @param {char} c The character to test
+ */
 export const isAlphaNumeric = (c) => {
     return isAlpha(c) || isDigit(c);
 }

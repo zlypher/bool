@@ -10,9 +10,7 @@ const whitespace = [ " ", "\r", "\t", "\n" ];
  */
 export default class BoolTokenizer {
     constructor() {
-        this.tokens = [];
-        this.start = 0;
-        this.current = 0;
+        this.resetState();
     }
 
     /**
@@ -21,6 +19,7 @@ export default class BoolTokenizer {
      */
     tokenize(expression) {
         this.expression = expression;
+        this.resetState();
 
         while (!this.isAtEnd()) {
             this.start = this.current;
@@ -31,6 +30,22 @@ export default class BoolTokenizer {
         return this.tokens;
     }
 
+    /**
+     * Resets the tokenizer to its initial state.
+     */
+    resetState() {
+        // List of extracted tokens
+        this.tokens = [];
+        // Start index in the expression of the current token
+        this.start = 0;
+        // Current index in the expression
+        this.current = 0;
+    }
+
+    /**
+     * Scans the next character from the current expression and adds the
+     * corresponding token.
+     */
     scanToken() {
         const c = this.advance();
 
@@ -127,6 +142,7 @@ export default class BoolTokenizer {
             this.advance();
         }
 
+        // Start index in the expr of the current token
         const val = this.expression.substring(this.start, this.current);
         this.addToken(tt.IDENTIFIER, val);
     }

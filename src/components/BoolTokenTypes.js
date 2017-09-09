@@ -1,3 +1,6 @@
+/**
+ * Export all possible types of tokens.
+ */
 export default {
     LEFT_PAREN: "LEFT_PAREN",
     RIGHT_PAREN: "RIGHT_PAREN",

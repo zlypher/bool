@@ -12,7 +12,6 @@ import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
  * ----------------------------------------------------------------------------
  *
  * http://www.craftinginterpreters.com/parsing-expressions.html
- *
  */
 
 /**

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./Footer.css";
 
+/**
+ * Footer is a simple component to render the footer text with links to the
+ * repository.
+ */
 export default class Footer extends Component {
     render() {
         return <footer className="Footer">

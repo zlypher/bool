@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "./Header.css";
 
+/**
+ * Header is a simple component to render the main heading and a sub heading.
+ */
 export default class Header extends Component {
     render() {
         const { props } = this;
