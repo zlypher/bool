@@ -2,13 +2,16 @@
 
 Bool Checker is intended as a simple utility to quickly check what your boolean expression results in with all possible inputs.
 
+[![Build Status](https://travis-ci.org/zlypher/bool.svg?branch=master)](https://travis-ci.org/zlypher/bool)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 The logic of the implemented interpreter is heavily inspired and influenced by [Robert Nystrom's "Crafting Interpreters"](http://www.craftinginterpreters.com/contents.html). Check it out! It's an awesome book about all the moving parts inside an interpreter.
 
 # Getting Started
 
 ```bash
 # Clone the repository
-git clone...
+git clone git@github.com:zlypher/bool.git
 
 # Install dependencies
 cd bool
