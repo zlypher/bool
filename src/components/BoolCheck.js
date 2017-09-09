@@ -86,14 +86,14 @@ export default class BoolCheck extends Component {
                         <tbody>
                             {state.arguments.map((args) =>
                                 <tr key={args}>
-                                    {args.map((a, i) => <td key={`${i}-${a}`}>{a}</td>)}
-                                    <td>{state.fn(setupEnvironment(state.variables, args)) ? "TRUE" : "FALSE"}</td>
+                                    {args.map((a, i) => <td key={`${i}-${a}`}>{a === 1 ? "true" : "false"}</td>)}
+                                    <td>{state.fn(setupEnvironment(state.variables, args)) ? "true" : "false"}</td>
                                 </tr>
                             )}
                         </tbody>
                     </table>
                 </div>
-            : <p className="BoolCheck-empty">Enter your boolean expression above and see all possible results in an instant.</p>}
+            : <p className="BoolCheck-empty">No expression detected</p>}
         </section>;
     }
 }
