@@ -4,9 +4,9 @@ import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
 
 it("can parse empty tokens", () => {
     const parser = new BoolParser();
-    const ast = parser.parse([{ type: tt.EOF, value: null }]);
+    const ast = parser.parse([]);
 
-    expect(ast).toEqual(undefined);
+    expect(ast).toEqual(null);
 });
 
 it("can parse tokens with only a variable", () => {

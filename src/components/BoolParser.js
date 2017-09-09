@@ -23,6 +23,10 @@ export default class BoolParser {
         this.tokens = tokens;
         this.current = 0;
 
+        if (tokens === null || typeof tokens === "undefined" || tokens.length === 0) {
+            return null;
+        }
+
         return this.expression();
     }
 
