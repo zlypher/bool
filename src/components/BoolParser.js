@@ -10,9 +10,9 @@ import { Binary, Unary, Variable, Grouping } from "./BoolExpr";
  *              |   primary ;
  * primary      >   STRING | "(" + expression + ")" ;
  * ----------------------------------------------------------------------------
- * 
+ *
  * http://www.craftinginterpreters.com/parsing-expressions.html
- * 
+ *
  */
 
 /**
@@ -33,7 +33,7 @@ export default class BoolParser {
     debug(fn) {
         // console.dir(`Call ${fn}`);
     }
-    
+
     /**
      * Grammar functions
      * ------------------------------------------------------------------------

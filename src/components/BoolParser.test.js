@@ -67,7 +67,7 @@ it("can parse a ! expression", () => {
         { type: tt.IDENTIFIER, value: "a" },
         { type: tt.EOF, value: "" }
     ];
-    
+
     const parser = new BoolParser();
     const ast = parser.parse(tokens);
 

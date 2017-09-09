@@ -84,7 +84,7 @@ export default class BoolCheck extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {state.arguments.map((args) => 
+                            {state.arguments.map((args) =>
                                 <tr key={args}>
                                     {args.map((a, i) => <td key={`${i}-${a}`}>{a}</td>)}
                                     <td>{state.fn(setupEnvironment(state.variables, args)) ? "TRUE" : "FALSE"}</td>

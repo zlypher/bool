@@ -20,7 +20,7 @@ export class Variable {
     constructor(value) {
         this.value = value;
     }
-    
+
     visit(interpreter) {
         return interpreter.visitVariableExpr(this);
     }
@@ -34,7 +34,7 @@ export class Unary {
         this.op = op;
         this.right = right;
     }
-    
+
     visit(interpreter) {
         return interpreter.visitUnaryExpr(this);
     }

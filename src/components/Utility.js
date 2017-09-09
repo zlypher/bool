@@ -1,10 +1,10 @@
 /**
  * Extracts the bit pattern from the given number.
- * 
+ *
  * Example:
  *  number=13 (0000 1101), bits=4 => [ 1, 1, 0, 1 ]
  *  number=2 (0000 0010), bits=2 => [ 1, 0 ]
- * 
+ *
  * @param {int} number The number to get the pattern from
  * @param {int} bits The number of bits to extract
  */

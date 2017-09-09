@@ -13,7 +13,7 @@ export default class BoolInterpreter {
     evaluate(expr) {
         return expr.visit(this);
     }
-    
+
     /**
      * Executes the given VARIABLE expression. Returns the corresponding
      * variable value from the environment.
