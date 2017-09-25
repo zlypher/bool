@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Bool Checker is intended as a simple utility to quickly check what your boolean expression results in with all possible inputs.",
   "author": "Thomas Prochazka <thomas.prochazka@gmail.com>",
+  "homepage": "https://zlypher.github.io/bool",
   "repository": "https://github.com/zlypher/bool",
   "license": "MIT",
   "private": true,
@@ -15,6 +16,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
   }
 }
