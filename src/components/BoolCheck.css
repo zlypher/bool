@@ -77,3 +77,15 @@
     color: burlywood;
     padding: 0 1px;
 }
+
+.Tick {
+    margin: 0 auto;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.Tick-active {
+    background-color: black;
+}

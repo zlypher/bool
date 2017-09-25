@@ -6,6 +6,12 @@ import BoolParser from "./BoolParser";
 import { generateArguments, setupEnvironment } from "./Utility";
 import './BoolCheck.css';
 
+const Tick = ({ flag }) => {
+    let className = `Tick ${flag ? "Tick-active" : "x"}`;
+    return <div className={className}>
+    </div>
+}
+
 export default class BoolCheck extends Component {
     constructor() {
         super();
@@ -59,6 +65,21 @@ export default class BoolCheck extends Component {
         this.recalculateResult(e.target.value);
     }
 
+
+    renderArg(flag, index) {
+        return <td key={`${index}-${flag}`}>
+            <Tick flag={flag} />
+        </td>
+    }
+
+    renderResult({ fn, variables }, args) {
+        const flag = fn(setupEnvironment(variables, args));
+
+        return <td>
+            <Tick flag={flag} />
+        </td>
+    }
+
     render() {
         const { state } = this;
 
@@ -84,8 +105,8 @@ export default class BoolCheck extends Component {
                         <tbody>
                             {state.arguments.map((args) =>
                                 <tr key={args}>
-                                    {args.map((a, i) => <td key={`${i}-${a}`}>{a === 1 ? "true" : "false"}</td>)}
-                                    <td>{state.fn(setupEnvironment(state.variables, args)) ? "true" : "false"}</td>
+                                    {args.map(this.renderArg)}
+                                    {this.renderResult(state, args)}
                                 </tr>
                             )}
                         </tbody>
