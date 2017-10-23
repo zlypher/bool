@@ -8,8 +8,7 @@ import './BoolCheck.css';
 
 const Tick = ({ flag }) => {
     let className = `Tick ${flag ? "Tick-active" : "x"}`;
-    return <div className={className}>
-    </div>
+    return <div className={className}></div>
 }
 
 export default class BoolCheck extends Component {
@@ -25,7 +24,8 @@ export default class BoolCheck extends Component {
             expression: "",
             fn: () => { return "?" },
             tokens: [],
-            variables: []
+            variables: [],
+            hasError: false
         };
 
         this.onExpressionChange = this.onExpressionChange.bind(this);
@@ -48,12 +48,13 @@ export default class BoolCheck extends Component {
                 expression: expression,
                 fn: interpretFunc(expr),
                 variables: args,
-                tokens: tokens
+                tokens: tokens,
+                hasError: false
             });
         } catch(e) {
-            console.dir(e);
             this.setState({
-                expression: expression
+                expression: expression,
+                hasError: true
             });
         }
     }
@@ -85,33 +86,28 @@ export default class BoolCheck extends Component {
 
         return <section className="BoolCheck">
             <input type="text"
-                className="BoolCheck-input"
+                className={`BoolCheck-input ${state.hasError ? "BoolCheck-input--error" : ""}`}
                 value={state.expression}
                 onChange={this.onExpressionChange}
                 placeholder="Enter your expression... (a && b)" />
 
             {state.variables.length > 0 ?
-                <div>
-                    <div className="BoolCheck-expression">
-                        {state.tokens.map((t, i) => <span key={t.type + "" + i} className={`BoolCheck-${t.type}`}>{t.value}</span>)}
-                    </div>
-                    <table className="BoolCheck-result" cellSpacing="0" cellPadding="0">
-                        <thead>
-                            <tr>
-                                {state.variables.map((v) => <th key={v}>{v}</th>)}
-                                <th>Result</th>
+                <table className="BoolCheck-result" cellSpacing="0" cellPadding="0">
+                    <thead>
+                        <tr>
+                            {state.variables.map((v) => <th key={v}>{v}</th>)}
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {state.arguments.map((args) =>
+                            <tr key={args}>
+                                {args.map(this.renderArg)}
+                                {this.renderResult(state, args)}
                             </tr>
-                        </thead>
-                        <tbody>
-                            {state.arguments.map((args) =>
-                                <tr key={args}>
-                                    {args.map(this.renderArg)}
-                                    {this.renderResult(state, args)}
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                        )}
+                    </tbody>
+                </table>
             : <p className="BoolCheck-empty">No expression detected</p>}
         </section>;
     }

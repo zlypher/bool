@@ -1,3 +1,4 @@
+html,
 body {
     color: #283845;
     margin: 0;
@@ -8,5 +9,5 @@ body {
 a {
     font-weight: 600;
     text-decoration: none;
-    color: #D36135;
+    color: rgb(36, 83, 14);
 }

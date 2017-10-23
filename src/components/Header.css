@@ -1,17 +1,29 @@
 .Header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 300px;
     margin-bottom: 16px;
+    color: rgb(36, 83, 14);
+    background: rgb(87, 196, 87);
 }
 
 .Header-main {
-    font-size: 28px;
+    font-size: 48px;
     font-weight: 700;
+    margin-top: 0;
     margin-bottom: 4px;
-    color: #D36135;
 }
 
 .Header-sub {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 300;
     margin-top: 0;
     margin-bottom: 20px;
+}
+
+.Header-text {
+    font-size: 14px;
+    max-width: 800px;
+    margin: 0 auto;
 }
