@@ -1,63 +1,70 @@
 .BoolCheck {
     margin: 0 auto;
     max-width: 800px;
+    padding: 0 15px;
 }
 
 .BoolCheck-input {
+    display: block;
     box-sizing: border-box;
     border: none;
-    border: 1px solid #C1B4AE;
-    display: block;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
     width: 100%;
     padding: 8px;
     outline: none;
     font-size: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
     transition: border 0.25s ease-in-out;
 }
 
 .BoolCheck-input:hover,
+.BoolCheck-input:focus,
 .BoolCheck-input:active {
-    border: 1px solid #283845;
+    border: 1px solid #212529;
 }
 
 .BoolCheck-input.BoolCheck-input--error {
     border: 1px solid red;
 }
 
-.BoolCheck-result {
-    border-top: 1px solid #283845;
-    width: 100%;
-}
-
-.BoolCheck-expression {
-    padding: 8px;
-}
-
 .BoolCheck-empty {
-    color: #283845;
+    color: #212529;
     padding: 30px 15px;
     line-height: 20px;
 }
 
-.BoolCheck-result th {
-    border-bottom: 1px solid #283845;
+.BoolCheck-result {
+    width: 100%;
+    border-collapse: collapse;
 }
 
 .BoolCheck-result td,
 .BoolCheck-result th {
     text-align: center;
-    padding: 4px;
+    padding: 8px;
+    border-right: 1px solid #212529;
+    border-bottom: 1px solid #212529;
 }
 
-.BoolCheck-result tr:nth-child(odd) td {
-    background-color: #ECE4B7;
+.BoolCheck-result th {
+    border-bottom: 3px solid #212529;
+}
+
+.BoolCheck-result td:last-child,
+.BoolCheck-result th:last-child {
+    border-left: 3px solid #212529;
+    border-right: none;
+}
+
+.BoolCheck-result tr:last-child td {
+    border-bottom: none;
 }
 
 .Tick {
     margin: 0 auto;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     border: 2px solid black;
 }
