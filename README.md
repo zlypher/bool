@@ -23,7 +23,7 @@ npm run start
 
 # Contributing
 
-TODO
+This is a small side project. You are welcome to create issues/pull requests. I'll try to respon as quick as possible.
 
 # LICENSE
 
