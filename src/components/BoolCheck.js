@@ -40,8 +40,17 @@ export default class BoolCheck extends Component {
             const tokens = this.tokenizer.tokenize(expression);
             const expr = this.parser.parse(tokens);
 
-            const args = tokens.filter(t => t.type === tt.IDENTIFIER).map(t => t.value);
-            const interpretFunc = (expr) => (env) => this.interpreter.interpret(expr, env);
+            // Make sure that arguments are unique even if they are referenced
+            // multiple times in the expression
+            const args = [
+                ...new Set(
+                    tokens
+                        .filter((t) => t.type === tt.IDENTIFIER)
+                        .map((t) => t.value)
+                ),
+            ];
+            const interpretFunc = (expr) => (env) =>
+                this.interpreter.interpret(expr, env);
 
             this.setState({
                 arguments: generateArguments(args.length),
