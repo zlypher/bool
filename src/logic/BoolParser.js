@@ -22,7 +22,11 @@ export default class BoolParser {
         this.tokens = tokens;
         this.current = 0;
 
-        if (tokens === null || typeof tokens === "undefined" || tokens.length === 0) {
+        if (
+            tokens === null ||
+            typeof tokens === "undefined" ||
+            tokens.length === 0
+        ) {
             return null;
         }
 
@@ -48,9 +52,9 @@ export default class BoolParser {
         this.debug("and");
         let expr = this.or();
 
-        while (this.match([ tt.AND ])) {
+        while (this.match([tt.AND])) {
             let op = this.previous();
-            let right = this.or();
+            let right = this.expression();
             return new Binary(expr, op, right);
         }
 
@@ -62,9 +66,9 @@ export default class BoolParser {
         let expr = this.unary();
 
         // ....
-        while (this.match([ tt.OR ])) {
+        while (this.match([tt.OR])) {
             let op = this.previous();
-            let right = this.unary();
+            let right = this.expression();
             return new Binary(expr, op, right);
         }
 
@@ -73,7 +77,7 @@ export default class BoolParser {
 
     unary() {
         this.debug("unary");
-        if (this.match([ tt.NOT ])) {
+        if (this.match([tt.NOT])) {
             let op = this.previous();
             let right = this.unary();
             return new Unary(op, right);
@@ -84,11 +88,11 @@ export default class BoolParser {
 
     primary() {
         this.debug("primary");
-        if (this.match([ tt.IDENTIFIER ])) {
+        if (this.match([tt.IDENTIFIER])) {
             return new Variable(this.previous().value);
         }
 
-        if (this.match([ tt.LEFT_PAREN ])) {
+        if (this.match([tt.LEFT_PAREN])) {
             let expr = this.expression();
             this.consume(tt.RIGHT_PAREN, "Expect ')' after expression.");
             return new Grouping(expr);

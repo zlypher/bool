@@ -1,8 +1,8 @@
 import tt from "./BoolTokenTypes";
-import { isAlpha, isAlphaNumeric } from "./Utility";
+import { isAlpha, isAlphaNumeric } from "../misc/utils";
 
 // TODO: RegEx
-const whitespace = [ " ", "\r", "\t", "\n" ];
+const whitespace = [" ", "\r", "\t", "\n"];
 
 /**
  * BoolTokenizer is responsible for parsing expressions
@@ -49,19 +49,19 @@ export default class BoolTokenizer {
     scanToken() {
         const c = this.advance();
 
-        if (c === '(') {
+        if (c === "(") {
             this.addToken(tt.LEFT_PAREN, "(");
             return;
-        } else if (c === ')') {
+        } else if (c === ")") {
             this.addToken(tt.RIGHT_PAREN, ")");
             return;
-        } else if (c === '!') {
+        } else if (c === "!") {
             this.addToken(tt.NOT, "!");
             return;
-        } else if (c === '|' && this.match('|')) {
+        } else if (c === "|" && this.match("|")) {
             this.addToken(tt.OR, "||");
             return;
-        } else if (c === '&' && this.match('&')) {
+        } else if (c === "&" && this.match("&")) {
             this.addToken(tt.AND, "&&");
             return;
         } else if (whitespace.includes(c)) {

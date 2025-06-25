@@ -1,4 +1,10 @@
-import { generateArguments, setupEnvironment, isAlpha, isDigit, isAlphaNumeric } from './Utility';
+import {
+    generateArguments,
+    setupEnvironment,
+    isAlpha,
+    isDigit,
+    isAlphaNumeric,
+} from "./utils";
 
 it("exports a method 'generateArguments'", () => {
     expect(generateArguments).toBeDefined();
@@ -21,55 +27,46 @@ it("can generate arguments with negative parameter", () => {
 
 it("can generate arguments for parameter: 1", () => {
     const result = generateArguments(1);
-    expect(result).toEqual(
-        [
-            [ 0 ],
-            [ 1 ],
-        ]
-    )
+    expect(result).toEqual([[0], [1]]);
 });
 
 it("can generate arguments for parameter: 2", () => {
     const result = generateArguments(2);
-    expect(result).toEqual(
-        [
-            [ 0, 0 ],
-            [ 0, 1 ],
-            [ 1, 0 ],
-            [ 1, 1 ],
-        ]
-    )
+    expect(result).toEqual([
+        [0, 0],
+        [0, 1],
+        [1, 0],
+        [1, 1],
+    ]);
 });
 
 it("can generate arguments for parameter: 3", () => {
     const result = generateArguments(3);
-    expect(result).toEqual(
-        [
-            [ 0, 0, 0 ],
-            [ 0, 0, 1 ],
-            [ 0, 1, 0 ],
-            [ 0, 1, 1 ],
-            [ 1, 0, 0 ],
-            [ 1, 0, 1 ],
-            [ 1, 1, 0 ],
-            [ 1, 1, 1 ],
-        ]
-    )
+    expect(result).toEqual([
+        [0, 0, 0],
+        [0, 0, 1],
+        [0, 1, 0],
+        [0, 1, 1],
+        [1, 0, 0],
+        [1, 0, 1],
+        [1, 1, 0],
+        [1, 1, 1],
+    ]);
 });
 
 it("can setup an environment", () => {
-    const argNames = [ "a", "b", "c" ];
-    const argValues = [ 0, 1, 1 ];
+    const argNames = ["a", "b", "c"];
+    const argValues = [0, 1, 1];
     const env = setupEnvironment(argNames, argValues);
 
     expect(env).toEqual({
         a: false,
         b: true,
-        c: true
+        c: true,
     });
 });
 
-it ("can determine alphas", () => {
+it("can determine alphas", () => {
     const tests = [
         { in: "a", out: true },
         { in: "X", out: true },
@@ -81,9 +78,9 @@ it ("can determine alphas", () => {
     tests.forEach((test) => {
         expect(isAlpha(test.in)).toEqual(test.out);
     });
-})
+});
 
-it ("can determine digits", () => {
+it("can determine digits", () => {
     const tests = [
         { in: "a", out: false },
         { in: "X", out: false },
@@ -95,4 +92,4 @@ it ("can determine digits", () => {
     tests.forEach((test) => {
         expect(isDigit(test.in)).toEqual(test.out);
     });
-})
+});
